@@ -20,9 +20,9 @@ import joblib
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-from preprocess import clean_data
-from load_data import load_raw_data
-from utils import (
+from src.preprocess import clean_data
+from src.load_data import load_raw_data
+from src.utils import (
     FEATURE_NAMES_PATH,
     FEATURED_DATA_PATH,
     SCALER_PATH,

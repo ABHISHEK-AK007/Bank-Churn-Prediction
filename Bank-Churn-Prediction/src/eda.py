@@ -14,9 +14,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-from preprocess import clean_data
-from load_data import load_raw_data
-from utils import IMAGES_DIR, TARGET_COL, ensure_dirs, get_logger
+from src.preprocess import clean_data
+from src.load_data import load_raw_data
+from src.utils import IMAGES_DIR, TARGET_COL, ensure_dirs, get_logger
 
 logger = get_logger(__name__)
 sns.set_theme(style="whitegrid")

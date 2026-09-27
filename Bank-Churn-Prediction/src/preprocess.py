@@ -15,8 +15,8 @@ Writes data/processed/cleaned_data.csv
 
 import pandas as pd
 
-from load_data import load_raw_data
-from utils import CLEANED_DATA_PATH, ensure_dirs, get_logger
+from src.load_data import load_raw_data
+from src.utils import CLEANED_DATA_PATH, ensure_dirs, get_logger
 
 logger = get_logger(__name__)
 

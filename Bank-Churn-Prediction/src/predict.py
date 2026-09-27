@@ -17,9 +17,9 @@ import argparse
 import joblib
 import pandas as pd
 
-from feature_engineering import build_feature_set
-from preprocess import clean_data
-from utils import (
+from src.feature_engineering import build_feature_set
+from src.preprocess import clean_data
+from src.utils import (
     FEATURE_NAMES_PATH,
     MODEL_PATH,
     MODELS_DIR,

@@ -18,8 +18,8 @@ first -- this is usually the single most useful column for the business.
 
 import pandas as pd
 
-from predict import predict
-from utils import PREDICTIONS_PATH, RAW_DATA_PATH, ensure_dirs, get_logger
+from src.predict import predict
+from src.utils import PREDICTIONS_PATH, RAW_DATA_PATH, ensure_dirs, get_logger
 
 logger = get_logger(__name__)
 

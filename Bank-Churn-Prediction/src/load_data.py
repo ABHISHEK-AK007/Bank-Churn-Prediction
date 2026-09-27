@@ -14,7 +14,7 @@ no other code needs to change as long as the column names match.
 
 import pandas as pd
 
-from utils import RAW_DATA_PATH, ensure_dirs, generate_synthetic_bank_data, get_logger
+from src.utils import RAW_DATA_PATH, ensure_dirs, generate_synthetic_bank_data, get_logger
 
 logger = get_logger(__name__)
 

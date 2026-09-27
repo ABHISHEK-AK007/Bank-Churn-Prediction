@@ -52,10 +52,10 @@ from sklearn.metrics import (
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold, train_test_split
 from sklearn.utils import resample
 
-from feature_engineering import build_feature_set
-from preprocess import clean_data
-from load_data import load_raw_data
-from utils import IMAGES_DIR, MODEL_PATH, RANDOM_STATE, TARGET_COL, ensure_dirs, get_logger, set_seed
+from src.feature_engineering import build_feature_set
+from src.preprocess import clean_data
+from src.load_data import load_raw_data
+from src.utils import IMAGES_DIR, MODEL_PATH, RANDOM_STATE, TARGET_COL, ensure_dirs, get_logger, set_seed
 
 try:
     from imblearn.over_sampling import SMOTE
