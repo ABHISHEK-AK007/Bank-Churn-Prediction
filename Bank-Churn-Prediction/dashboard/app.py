@@ -3,9 +3,7 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 import joblib
-from src.load_data import load_raw_data
-from src.preprocess import clean_data
-from src.feature_engineering import build_feature_set
+from src.predict import load_artifacts, prepare_input
 
 # ============================================================
 # PAGE CONFIG
@@ -541,13 +539,7 @@ if predict_button:
             st.error("❌ Trained model not found: models/random_forest.pkl")
             st.stop()
 
-        model = joblib.load(model_path)
-
-        # Load optimized decision threshold
-        if threshold_path.exists():
-            decision_threshold = float(joblib.load(threshold_path))
-        else:
-            decision_threshold = 0.5
+        model, scaler, feature_names, decision_threshold = load_artifacts()
 
         # ====================================================
         # STEP 3.2 - Create user input DataFrame
@@ -567,72 +559,14 @@ if predict_button:
         }])
 
         # ====================================================
-        # STEP 3.3 - Load original training data
+        # STEP 3.3 - Apply the training-time inference pipeline
         # ====================================================
 
-        raw_df = load_raw_data()
-
-        # Add target column temporarily
-        user_df["Exited"] = 0
-
-        # Add identifier columns if the original dataset uses them
-        if "CustomerId" in raw_df.columns:
-            user_df["CustomerId"] = -1
-
-        if "Surname" in raw_df.columns:
-            user_df["Surname"] = "UserInput"
-
-        # Keep same column order as original dataset
-        user_df = user_df.reindex(
-            columns=raw_df.columns,
-            fill_value=0
+        user_features, _ = prepare_input(
+            user_df,
+            scaler,
+            feature_names
         )
-
-        # ====================================================
-        # STEP 3.4 - Combine original data + user input
-        # ====================================================
-
-        combined_df = pd.concat(
-            [raw_df, user_df],
-            ignore_index=True
-        )
-
-        # ====================================================
-        # STEP 3.5 - Apply SAME preprocessing as training
-        # ====================================================
-
-        cleaned_df = clean_data(combined_df)
-
-        # ====================================================
-        # STEP 3.6 - Apply SAME feature engineering
-        # ====================================================
-
-        featured_df, _ = build_feature_set(
-            cleaned_df,
-            fit=True
-        )
-
-        # Last row = user's input
-        user_features = featured_df.iloc[[-1]].copy()
-
-        # Remove target column
-        user_features = user_features.drop(
-            columns=["Exited"],
-            errors="ignore"
-        )
-
-        # ====================================================
-        # STEP 3.7 - Match model's expected columns
-        # ====================================================
-
-        if hasattr(model, "feature_names_in_"):
-
-            expected_columns = list(model.feature_names_in_)
-
-            user_features = user_features.reindex(
-                columns=expected_columns,
-                fill_value=0
-            )
 
         # ====================================================
         # STEP 3.8 - Prediction probability
