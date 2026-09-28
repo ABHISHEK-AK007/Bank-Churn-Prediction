@@ -37,10 +37,18 @@ pip install -r requirements.txt
 # try the pipeline immediately.
 
 python main.py
+
+# Start the interactive dashboard
+python -m streamlit run dashboard/app.py
 ```
 
 This runs, in order: load → clean → EDA → feature engineering → train →
 predict → risk score, and writes every output file described below.
+
+The dashboard opens at `http://localhost:8501` by default. It reads
+`data/processed/predictions.csv` and
+`data/processed/retention_worklist_top100.csv`; use its refresh button after
+running `python main.py` again.
 
 To work through it interactively instead, open the notebooks in order
 (`01_data_loading.ipynb` → `06_prediction.ipynb`) — each one imports the
