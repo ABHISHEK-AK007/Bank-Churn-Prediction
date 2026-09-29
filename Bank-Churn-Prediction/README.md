@@ -2,9 +2,9 @@
 
 An end-to-end customer churn prediction pipeline for a retail bank: data
 cleaning, EDA, feature engineering, model training/tuning, prediction,
-risk scoring, and a Power BI-ready output feed.
+risk scoring, and a Streamlit-ready output feed.
 
-**Pipeline:** Python (VS Code/Jupyter) → Data Analysis → Machine Learning → CSV Output → Power BI Dashboard → Report → PPT
+**Pipeline:** Python (VS Code/Jupyter) → Data Analysis → Machine Learning → CSV Output → Streamlit  Dashboard → Report → PPT
 
 ## Project Structure
 
