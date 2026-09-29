@@ -20,6 +20,7 @@ from src.risk_score import score_and_tier  # noqa: E402
 
 PREDICTIONS_PATH = ROOT_DIR / "data" / "processed" / "predictions.csv"
 WORKLIST_PATH = ROOT_DIR / "data" / "processed" / "retention_worklist_top100.csv"
+MODEL_PATH = ROOT_DIR / "models" / "random_forest.pkl"
 
 st.set_page_config(page_title="Bank Churn Intelligence", page_icon="🏦", layout="wide")
 
@@ -199,7 +200,10 @@ with explorer:
 	st.plotly_chart(scatter)
 
 with scorer:
-	render_customer_scorer()
+	if MODEL_PATH.exists():
+		render_customer_scorer()
+	else:
+		st.warning("Customer scoring is unavailable because the trained model artifact is not included in this deployment.")
 
 with retention:
 	st.subheader("Retention worklist")

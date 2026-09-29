@@ -1,5 +1,17 @@
 # Power BI Dashboard
 
+## Deploy the Streamlit dashboard
+
+For Streamlit Community Cloud, select `dashboard/app.py` as the app entrypoint.
+Community Cloud will use `dashboard/requirements.txt`, keeping notebook and
+model-training packages out of the dashboard build. The deployed app reads the
+committed files in `data/processed/`.
+
+The trained model file `models/random_forest.pkl` is excluded from Git and is
+too large for a regular GitHub file, so the dashboard remains usable for
+exploration but customer scoring is unavailable unless that model is hosted
+separately and configured for the deployment.
+
 `.pbix` files are binary Power BI Desktop files and can't be generated
 from code — build `bank_dashboard.pbix` in Power BI Desktop using
 `data/processed/predictions.csv` as the data source. Suggested layout:
