@@ -1,8 +1,15 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from pathlib import Path
 import joblib
+from pathlib import Path
+import sys
+# Add project folder to Python path
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+
+if str(PROJECT_DIR) not in sys.path:
+    sys.path.insert(0, str(PROJECT_DIR))
+
 from src.predict import load_artifacts, prepare_input
 
 # ============================================================
